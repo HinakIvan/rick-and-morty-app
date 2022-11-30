@@ -12,8 +12,8 @@ abstract class PersonRemoteDataSource {
 class PersonRemoteDataSoureImpl implements PersonRemoteDataSource{
   @override
   Future<List<PersonModel>> getAllPersons(int page) async{
-    var url = Uri.https('https://rickandmortyapi.com/api/character/?page=$page','/appllication/json' );
-    final response = await http.get(url);
+    var url = Uri.https('https://rickandmortyapi.com','/api/character/?page=$page' );
+    final response = await http.get(url,headers:{'Content-Type':'application/json'} );
 
     if(response.statusCode==200){
       final persons= json.decode(response.body) ;
@@ -25,8 +25,8 @@ class PersonRemoteDataSoureImpl implements PersonRemoteDataSource{
 
   @override
   Future<List<PersonModel>> searchAllPerson(String querry)async {
-    var url = Uri.https('https://rickandmortyapi.com/api/character/?name=$querry','/appllication/json' );
-    final response = await http.get(url);
+    var url = Uri.https('https://rickandmortyapi.com','/api/character/?name=$querry' );
+    final response = await http.get(url,headers: {'Content-Type':'application/json'});
 
     if(response.statusCode==200){
       final persons= json.decode(response.body) ;
